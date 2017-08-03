@@ -11,12 +11,15 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-
+/**
+ * 设置代理ip 使用 高匿
+ *
+ */
 public class ProxyIp {
 	public static void main(String[] args) throws ParseException, IOException {
 		CloseableHttpClient httpClient=HttpClients.createDefault(); // 创建httpClient实例
 		HttpGet httpGet=new HttpGet("http://www.csdn.net"); // 创建httpget实例
-		HttpHost proxy = new HttpHost("175.155.241.143", 808);
+		HttpHost proxy = new HttpHost("175.155.241.143", 808);// ip 端口
 		RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
 		httpGet.setConfig(config);
 		httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36");

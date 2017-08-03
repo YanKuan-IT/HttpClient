@@ -8,8 +8,6 @@ import java.net.URL;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -17,14 +15,19 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
-
+/**
+ * 基础内容
+ *
+ */
 public class HelloWorld {
 	
 	public static void main(String[] args) throws Exception{
+		//获取自1970年1月1日0时起的毫秒数
 		long millisOne = System.currentTimeMillis();
 		testOne();//1169
 //		testTwo();//482
 		long millisTwo = System.currentTimeMillis();
+		//运行时间
 		System.out.println("用时"+(float)(millisTwo-millisOne)/1000+"秒");
 	}
 	
@@ -34,21 +37,15 @@ public class HelloWorld {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		// 创建httpget实例
 		HttpGet httpGet = new HttpGet("http://www.tuicool.com/");
-		//设置代理ip
+		//设置代理ip 《高匿》
 		//设置超时时间
 		HttpHost proxy = new HttpHost("110.73.2.14", 8123);
 		RequestConfig config = RequestConfig.custom()
-				.setConnectTimeout(10000)	//设置连接超时时间 10s
-				.setSocketTimeout(10000)	//设置读取超时时间10s
-				.setProxy(proxy)			//设置代理ip
+				.setConnectTimeout(10000)	// 设置连接超时时间 10s
+				.setSocketTimeout(10000)	// 设置读取超时时间 10s
+				.setProxy(proxy)			// 设置代理ip
 				.build();
 		httpGet.setConfig(config);
-		
-//		RequestConfig config = RequestConfig.custom()
-//				.setConnectTimeout(10000)	//设置连接超时时间 10s
-//				.setSocketTimeout(10000)	//设置读取超时时间10s
-//				.build();
-		
 		// 设置请求头消息User-Agent模拟浏览器
 		httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36");
 		// 执行httpGet请求
