@@ -17,31 +17,23 @@ public class GetPicture {
 	}
 	
 	public static void Get(String url) throws Exception{
-		CloseableHttpClient httpClient=HttpClients.createDefault(); // 创建httpClient实例
-		HttpGet httpGet=new HttpGet(url); // 创建httpget实例
+		// 创建httpClient实例
+		CloseableHttpClient httpClient=HttpClients.createDefault(); 
+		// 创建httpget实例
+		HttpGet httpGet=new HttpGet(url); 
+		// 设置请求头消息User-Agent模拟浏览器
 		httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:50.0) Gecko/20100101 Firefox/50.0");
-		CloseableHttpResponse response=httpClient.execute(httpGet); // 执行http get请求
-		HttpEntity entity=response.getEntity(); // 获取返回实体
+		// 执行http get请求
+		CloseableHttpResponse response=httpClient.execute(httpGet); 
+		// 获取返回实体
+		HttpEntity entity=response.getEntity(); 
 		if(entity!=null){
+			// 获取访问内容类型Content-Type
 			System.out.println("ContentType:"+entity.getContentType().getValue());
 			InputStream inputStream=entity.getContent();
 			FileUtils.copyToFile(inputStream, new File("F://1.jpg"));
 		}
-		response.close(); // response关闭
-		httpClient.close(); // httpClient关闭
-	}
-	public static void TestGet(String url) throws Exception{
-		CloseableHttpClient httpClient=HttpClients.createDefault(); // 创建httpClient实例
-		HttpGet httpGet=new HttpGet(url); // 创建httpget实例
-		httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:50.0) Gecko/20100101 Firefox/50.0");
-		CloseableHttpResponse response=httpClient.execute(httpGet); // 执行http get请求
-		HttpEntity entity=response.getEntity(); // 获取返回实体
-		if(entity!=null){
-			System.out.println("ContentType:"+entity.getContentType().getValue());
-			InputStream inputStream=entity.getContent();
-			FileUtils.copyToFile(inputStream, new File("F://1.jpg"));
-		}
-		response.close(); // response关闭
+		response.close(); 	// response关闭
 		httpClient.close(); // httpClient关闭
 	}
 }
